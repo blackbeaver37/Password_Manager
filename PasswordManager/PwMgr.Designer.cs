@@ -79,6 +79,7 @@ namespace PasswordManager
             this.tbLogin.PasswordChar = '*';
             this.tbLogin.Size = new System.Drawing.Size(100, 19);
             this.tbLogin.TabIndex = 2;
+            this.tbLogin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbLogin_KeyDown);
             // 
             // groupBox1
             // 
@@ -211,6 +212,7 @@ namespace PasswordManager
             this.tbPW.Size = new System.Drawing.Size(174, 19);
             this.tbPW.TabIndex = 4;
             this.tbPW.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbPW.KeyDown += new System.Windows.Forms.KeyEventHandler(this.data_KeyDown);
             // 
             // tbID
             // 
@@ -221,6 +223,7 @@ namespace PasswordManager
             this.tbID.Size = new System.Drawing.Size(174, 19);
             this.tbID.TabIndex = 3;
             this.tbID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.data_KeyDown);
             // 
             // lbPW
             // 
@@ -253,6 +256,7 @@ namespace PasswordManager
             this.cbSite.Sorted = true;
             this.cbSite.TabIndex = 1;
             this.cbSite.SelectedIndexChanged += new System.EventHandler(this.cbSite_SelectedIndexChanged);
+            this.cbSite.KeyDown += new System.Windows.Forms.KeyEventHandler(this.data_KeyDown);
             // 
             // lbSite
             // 
@@ -276,6 +280,7 @@ namespace PasswordManager
             this.Font = new System.Drawing.Font("Helvetica", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "PwMgr";
             this.Text = "Password Manager";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PwMgr_KeyDown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
