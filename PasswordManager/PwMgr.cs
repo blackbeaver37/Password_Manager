@@ -28,7 +28,7 @@ namespace PasswordManager
 
             else
             {
-                MessageBox.Show("Wrong Password!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Wrong Password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 tbLogin.Clear();
             }
         }
@@ -72,41 +72,51 @@ namespace PasswordManager
         // Edit 버튼
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            btnEdit.Enabled = false;
-            btnAdd.Enabled = false;
-            btnDel.Enabled = false;
-            btnEditOK.Enabled = true;
-            btnEditCancel.Enabled = true;
+            if(cbSite.Text != "")
+            {
+                btnEdit.Enabled = false;
+                btnAdd.Enabled = false;
+                btnDel.Enabled = false;
+                btnEditOK.Enabled = true;
+                btnEditCancel.Enabled = true;
 
-            cbSite.DropDownStyle = ComboBoxStyle.Simple;
-            tbID.ReadOnly = false;
-            tbPW.ReadOnly = false;
-
+                cbSite.DropDownStyle = ComboBoxStyle.Simple;
+                tbID.ReadOnly = false;
+                tbPW.ReadOnly = false;
+            }
         }
 
         // Edit - OK 버튼
         private void btnEditOK_Click(object sender, EventArgs e)
         {
-            btnEdit.Enabled = true;
-            btnAdd.Enabled = true;
-            btnDel.Enabled = true;
-            btnEditOK.Enabled = false;
-            btnEditCancel.Enabled = false;
-
             data tmpdata = new data();
             tmpdata.site = cbSite.Text;
             tmpdata.id = tbID.Text;
             tmpdata.pw = tbPW.Text;
-            datas[index] = tmpdata;
-            keys[index] = cbSite.Text;
 
-            cbSite.DropDownStyle = ComboBoxStyle.DropDownList;
-            initCbSite();
-            cbSite.Text = datas[index].site;
-            tbID.ReadOnly = true;
-            tbPW.ReadOnly = true;
+            if (tmpdata.site != "" && tmpdata.id != "" && tmpdata.pw != "")
+            {
+                btnEdit.Enabled = true;
+                btnAdd.Enabled = true;
+                btnDel.Enabled = true;
+                btnEditOK.Enabled = false;
+                btnEditCancel.Enabled = false;
 
-            saveFile();
+                datas[index] = tmpdata;
+                keys[index] = cbSite.Text;
+
+                cbSite.DropDownStyle = ComboBoxStyle.DropDownList;
+                initCbSite();
+                cbSite.Text = datas[index].site;
+                tbID.ReadOnly = true;
+                tbPW.ReadOnly = true;
+
+                saveFile();
+            }
+            else
+            {
+                MessageBox.Show("Input Correct Values", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         // Edit - Cancel 버튼
@@ -147,28 +157,35 @@ namespace PasswordManager
         // Add - OK 버튼
         private void btnAddOK_Click(object sender, EventArgs e)
         {
-            btnEdit.Enabled = true;
-            btnAdd.Enabled = true;
-            btnDel.Enabled = true;
-            btnAddOK.Enabled = false;
-            btnAddCancel.Enabled = false;
-
             data tmpdata = new data();
             tmpdata.site = cbSite.Text;
             tmpdata.id = tbID.Text;
             tmpdata.pw = tbPW.Text;
 
-            datas.Add(tmpdata);
-            keys.Add(tmpdata.site);
-            index = keys.Count - 1;
+            if (tmpdata.site != "" && tmpdata.id != "" && tmpdata.pw != "")
+            {
+                btnEdit.Enabled = true;
+                btnAdd.Enabled = true;
+                btnDel.Enabled = true;
+                btnAddOK.Enabled = false;
+                btnAddCancel.Enabled = false;
 
-            cbSite.DropDownStyle = ComboBoxStyle.DropDownList;
-            initCbSite();
-            cbSite.Text = datas[index].site;
-            tbID.ReadOnly = true;
-            tbPW.ReadOnly = true;
+                datas.Add(tmpdata);
+                keys.Add(tmpdata.site);
+                index = keys.Count - 1;
 
-            saveFile();
+                cbSite.DropDownStyle = ComboBoxStyle.DropDownList;
+                initCbSite();
+                cbSite.Text = datas[index].site;
+                tbID.ReadOnly = true;
+                tbPW.ReadOnly = true;
+
+                saveFile();
+            }
+            else
+            {
+                MessageBox.Show("Input Correct Values", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         // Add - Cancel 버튼
@@ -192,13 +209,16 @@ namespace PasswordManager
         // Delete 버튼
         private void btnDel_Click(object sender, EventArgs e)
         {
-            btnEdit.Enabled = false;
-            btnAdd.Enabled = false;
-            btnDel.Enabled = false;
-            btnDelOK.Enabled = true;
-            btnDelCancel.Enabled = true;
+            if(cbSite.Text != "")
+            {
+                btnEdit.Enabled = false;
+                btnAdd.Enabled = false;
+                btnDel.Enabled = false;
+                btnDelOK.Enabled = true;
+                btnDelCancel.Enabled = true;
 
-            cbSite.Enabled = false;
+                cbSite.Enabled = false;
+            }
         }
 
         // Delete - OK 버튼
@@ -231,6 +251,41 @@ namespace PasswordManager
             btnDelCancel.Enabled = false;
 
             cbSite.Enabled = true;
+        }
+
+        // password 입력 후 엔터
+        private void tbLogin_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                btnLogin_Click(sender, e);
+            }
+        }
+
+        // password 입력 후 엔터 또는 ESC
+        private void data_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                if (btnEditOK.Enabled) btnEditOK_Click(sender, e);
+                else if (btnAddOK.Enabled) btnAddOK_Click(sender, e);
+                else if (btnDelOK.Enabled) btnDelOK_Click(sender, e);
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                if (btnEditOK.Enabled) btnEditCancel_Click(sender, e);
+                else if (btnAddOK.Enabled) btnAddCancel_Click(sender, e);
+                else if (btnDelOK.Enabled) btnDelCancel_Click(sender, e);
+            }
+        }
+
+        // Edit, Add, Del 단축키
+        private void PwMgr_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.E) btnEdit_Click(sender, e);
+            else if (e.KeyCode == Keys.A) btnAdd_Click(sender, e);
+            else if (e.KeyCode == Keys.D) btnDel_Click(sender, e);
+
         }
     }
 }
