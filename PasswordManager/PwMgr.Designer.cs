@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 
 namespace PasswordManager
@@ -352,7 +352,7 @@ namespace PasswordManager
         private void saveFile()
         {
             StreamWriter file = new StreamWriter(DATA_PATH);
-            for(int i=0; i<keys.Count; i++)
+            for (int i = 0; i < keys.Count; i++)
             {
                 string tmp = DUMMY_1;
                 tmp += SPLIT_STRING;
@@ -422,4 +422,3 @@ namespace PasswordManager
         private System.Windows.Forms.Button btnAdd;
     }
 }
-

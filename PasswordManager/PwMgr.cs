@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -72,7 +72,7 @@ namespace PasswordManager
         // Edit 버튼
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if(cbSite.Text != "")
+            if (cbSite.Text != "")
             {
                 btnEdit.Enabled = false;
                 btnAdd.Enabled = false;
@@ -209,7 +209,7 @@ namespace PasswordManager
         // Delete 버튼
         private void btnDel_Click(object sender, EventArgs e)
         {
-            if(cbSite.Text != "")
+            if (cbSite.Text != "")
             {
                 btnEdit.Enabled = false;
                 btnAdd.Enabled = false;
@@ -256,7 +256,7 @@ namespace PasswordManager
         // password 입력 후 엔터
         private void tbLogin_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 btnLogin_Click(sender, e);
             }
@@ -265,7 +265,7 @@ namespace PasswordManager
         // password 입력 후 엔터 또는 ESC
         private void data_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 if (btnEditOK.Enabled) btnEditOK_Click(sender, e);
                 else if (btnAddOK.Enabled) btnAddOK_Click(sender, e);
@@ -282,7 +282,7 @@ namespace PasswordManager
         // Edit, Add, Del 단축키
         private void PwMgr_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.E) btnEdit_Click(sender, e);
+            if (e.KeyCode == Keys.E) btnEdit_Click(sender, e);
             else if (e.KeyCode == Keys.A) btnAdd_Click(sender, e);
             else if (e.KeyCode == Keys.D) btnDel_Click(sender, e);
 
