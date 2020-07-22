@@ -2,7 +2,7 @@
 
 초기 password = password\
 데이터 파일 = "C:\\ProgramData\\PasswordManager\\data.txt" \
-font = "Helvetica"\
+font = "Helvetica"
 
 미구현 :
 1. Change Password은 로그인 전에 해야함.
