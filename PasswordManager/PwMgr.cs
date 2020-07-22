@@ -15,6 +15,7 @@ namespace PasswordManager
         public PwMgr()
         {
             InitializeComponent();
+            loadPW();
         }
 
         // Login 버튼
@@ -22,8 +23,9 @@ namespace PasswordManager
         {
             if (tbLogin.Text == password)
             {
-                loadData();
                 enableProc();
+                loadData();
+                initCbSite();
             }
 
             else
@@ -286,6 +288,19 @@ namespace PasswordManager
             else if (e.KeyCode == Keys.A) btnAdd_Click(sender, e);
             else if (e.KeyCode == Keys.D) btnDel_Click(sender, e);
 
+        }
+
+        // 툴바 About 메뉴
+        private void tbtnAbout_Click(object sender, EventArgs e)
+        {
+            AbountForm abountForm = new AbountForm();
+            abountForm.Show();
+        }
+
+        private void tbtnChangePW_Click(object sender, EventArgs e)
+        {
+            ChangePW changePW = new ChangePW();
+            changePW.Show();
         }
     }
 }
