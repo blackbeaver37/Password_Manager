@@ -25,6 +25,8 @@ namespace PasswordManager
             {
                 enableProc();
                 loadData();
+                password = tbLogin.Text;
+                saveFile();
                 initCbSite();
             }
 
